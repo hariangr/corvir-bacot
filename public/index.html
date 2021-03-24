@@ -1,108 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="assets/js/p5.js"></script>
-    <script src="assets/js/p5.sound.min.js"></script>
 
-    <script src="assets/js/mappa-mundi@0.0.4.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <meta charset="utf-8" />
+<head>
+  <script src="assets/js/p5.js"></script>
+  <script src="assets/js/p5.sound.min.js"></script>
 
-    <link rel="stylesheet" href="assets/css/auto-complete.css" />
-    <script src="assets/js/auto-complete.min.js"></script>
+  <script src="assets/js/mappa-mundi@0.0.4.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <meta charset="utf-8" />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/app/haversine.js"></script>
+  <link rel="stylesheet" href="assets/css/auto-complete.css" />
+  <script src="assets/js/auto-complete.min.js"></script>
 
-    <title>Indonesia BFS Covid19 (IBC) Tracer Berbasis Web</title>
-  </head>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/app/haversine.js"></script>
 
-  <body>
-    <div id="loadingIndicator" class="loadingOverlay">
-      <div class="spinner"></div>
-    </div>
+  <title>Indonesia BFS Covid19 (IBC) Tracer Berbasis Web</title>
+</head>
 
-    <div class="sidebarContainer" id="sidebarx">
-      <div class="sidebar">
-        <div id="titlehead">
-          <img class="logo-icon" alt="Entah" src="assets/img/risteklogo.png" />
-          <img class="logo-icon" alt="Entah" src="assets/img/unud.png" />
-          <h2>Indonesia BFS Covid19 (IBC) Tracer Berbasis Web</h2>
-          <h3>
-            Kementerian Riset dan Teknologi Republik Indonesia - RS Universitas
-            Udayana
-          </h3>
+<body>
+  <div id="loadingIndicator" class="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="sidebarContainer" id="sidebarx">
+    <div class="sidebar">
+      <div id="titlehead">
+        <img class="logo-icon" alt="Entah" src="assets/img/risteklogo.png" />
+        <img class="logo-icon" alt="Entah" src="assets/img/unud.png" />
+        <h2>Indonesia BFS Covid19 (IBC) Tracer Berbasis Web</h2>
+        <h3>
+          Kementerian Riset dan Teknologi Republik Indonesia - RS Universitas
+          Udayana
+        </h3>
+      </div>
+
+      <hr />
+
+      <div>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroup-sizing-default">Asal</span>
+
+          <input id="asalInput" type="text" class="form-control" placeholder="Denpasar" aria-label="Tujuan"
+            aria-describedby="inputGroup-sizing-default" />
+        </div>
+        <label><small>Ketik nama kabupaten/kota asal</small></label>
+        <div id="asalCardCont" class="pt-2"></div>
+
+        <div class="justify-content-center my-2">
+          <img class="rounded mx-auto d-block" src="/assets/img/arrow_down.svg" alt="Down arrow" />
         </div>
 
-        <hr />
-
-        <div>
-          <div class="input-group">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >Asal</span
-            >
-
-            <input
-              id="asalInput"
-              type="text"
-              class="form-control"
-              placeholder="Denpasar"
-              aria-label="Tujuan"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </div>
-          <label><small>Ketik nama kabupaten/kota asal</small></label>
-          <div id="asalCardCont" class="pt-2"></div>
-
-          <div class="justify-content-center my-2">
-            <img
-              class="rounded mx-auto d-block"
-              src="/assets/img/arrow_down.svg"
-              alt="Down arrow"
-            />
-          </div>
-
-          <div class="input-group pt-2">
-            <span class="input-group-text">Tujuan</span>
-            <input
-              id="tujuanInput"
-              type="text"
-              class="form-control"
-              placeholder="Jakarta"
-              aria-label="Tujuan"
-              aria-describedby="inputGroup-sizing-default"
-            />
-          </div>
-          <label><small>Ketik nama kabupaten/kota tujuan</small></label>
-          <div id="tujuanCardCont" class="pt-2"></div>
+        <div class="input-group pt-2">
+          <span class="input-group-text">Tujuan</span>
+          <input id="tujuanInput" type="text" class="form-control" placeholder="Jakarta" aria-label="Tujuan"
+            aria-describedby="inputGroup-sizing-default" />
         </div>
+        <label><small>Ketik nama kabupaten/kota tujuan</small></label>
+        <div id="tujuanCardCont" class="pt-2"></div>
+      </div>
 
-        <div>
-          <button
-            id="btnMulai"
-            type="button"
-            class="btn col-6 btn-primary btn-lg w-100 mt-3"
-          >
-            Mulai
-          </button>
-        </div>
+      <div>
+        <button id="btnMulai" type="button" class="btn col-6 btn-primary btn-lg w-100 mt-3">
+          Mulai
+        </button>
+      </div>
 
-        <hr />
+      <hr />
 
-        <h5>Rute Pelacakan</h5>
-        <div id="regionPassed">
-          <p>
-            Belum ada pelacakan dimulai, Silahkan pilih <i>asal</i> dan
-            <i>tujuan</i> lalu tekan <b>Mulai</b> untuk memulai pelacakan
-          </p>
-        </div>
+      <h5>Rute Pelacakan</h5>
+      <div id="regionPassed">
+        <p>
+          Belum ada pelacakan dimulai, Silahkan pilih <i>asal</i> dan
+          <i>tujuan</i> lalu tekan <b>Mulai</b> untuk memulai pelacakan
+        </p>
+      </div>
+
+      <div class="hideLoading" id="messageResult">
+        <p>Berdasarkan kepada hasil pelacakan penyebaran Covid19 di atas, maka untuk memutuskan penyebaran Covid19 perlu
+          dilakukan hal-hal berikut oleh pemerintah setempat bersama instansi terkait:
+        </p>
+        <ol>
+          <li>Pemeriksaan di setiap pintu masuk dan perbatasan (bandara, pelabuhan, terminal)</li>
+          <li>Penyediaan layanan tes Covid19</li>
+          <li>Vaksinasi</li>
+          <li>Sosialisasi ke masyarakat: memakai masker, mencuci tangan, menjaga jarak, menghindari kerumunan</li>
+        </ol>
       </div>
     </div>
+  </div>
 
-    <img id="hamburgerMenu" src="assets/img/list.svg" alt="hamburger menu" />
+  <img id="hamburgerMenu" src="assets/img/list.svg" alt="hamburger menu" />
 
-    <script src="assets/js/app/sketch.js"></script>
-    <script defer src="assets/js/app/ui.js"></script>
-  </body>
+  <script src="assets/js/app/sketch.js"></script>
+  <script defer src="assets/js/app/ui.js"></script>
+</body>
+
 </html>

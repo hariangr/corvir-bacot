@@ -110,6 +110,9 @@ document.getElementById("btnMulai").addEventListener("click", function () {
     mulaiElem.innerText = "Stop";
     mulaiElem.classList.add("btn-danger");
     mulaiElem.classList.remove("btn-primary");
+
+    document.getElementById("messageResult").classList.add("hideLoading");
+    console.log("sudah dimulai");
   }
 });
 
@@ -138,6 +141,9 @@ document.addEventListener("bfs-finish", (e) => {
   mulaiElem.innerText = "Mulai";
   mulaiElem.classList.remove("btn-danger");
   mulaiElem.classList.add("btn-primary");
+
+  document.getElementById("messageResult").classList.remove("hideLoading");
+  console.log("sudah selesai");
 });
 
 let showSidebar = true;
